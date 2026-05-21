@@ -1,74 +1,185 @@
-# Rice Classification with CNN
+# Rice Image Classification with CNN
 
-## Overview
-This project implements a Convolutional Neural Network (CNN) model to classify five different types of rice grains: Arborio, Basmati, Ipsala, Jasmine, and Karacadag. Using deep learning techniques, the model analyzes high-resolution rice images to distinguish varieties, supporting agricultural quality control and food production consistency.
+A Convolutional Neural Network that classifies five different rice grain varieties from images, with a Streamlit web application for real-time predictions — supporting agricultural quality control and food production consistency.
 
-The project includes:
-- A Jupyter Notebook for data preprocessing, model training, and evaluation
-- A trained CNN model saved in HDF5 format
-- A Streamlit web application for real-time rice classification from uploaded images
+---
 
-## Dataset
-The dataset is sourced from the Rice Image Dataset on Kaggle, containing high-resolution images of five rice varieties captured under controlled conditions. Images are resized to 64x64 pixels and normalized for model input.
+## English
 
-- **Classes:** Arborio, Basmati, Ipsala, Jasmine, Karacadag
-- **Total Images:** ~75,000 (varies by class)
-- **Image Format:** RGB, high-resolution
+### About
 
-## Technologies Used
-- **Python** for scripting and data processing
-- **TensorFlow/Keras** for building and training the CNN model
-- **OpenCV** for image preprocessing
-- **Pandas & NumPy** for data manipulation
-- **Matplotlib** for visualization
-- **Scikit-learn** for data splitting
-- **Streamlit** for the web application interface
-- **PIL** for image handling
+This project implements a CNN model to distinguish between five rice varieties: Arborio, Basmati, Ipsala, Jasmine, and Karacadag. Using ~75,000 high-resolution images from Kaggle, the model is trained to identify subtle visual differences between grain types. The project includes a Jupyter training notebook and a Streamlit web app for user-friendly predictions.
 
-## Model Architecture
-The CNN model consists of:
-- Input layer: 64x64x3 images
-- Convolutional layers with ReLU activation and max pooling
-- Flatten layer
-- Dense layers with softmax output for 5-class classification
+### Features
 
-**Training Results:**
-- Epochs: 10
-- Optimizer: Adam
-- Loss: Sparse Categorical Crossentropy
-- Metrics: Accuracy
-- Validation Accuracy: ~85-90% (approximate, run evaluation for exact figures)
+- 5-class image classification (Arborio, Basmati, Ipsala, Jasmine, Karacadag)
+- ~85–90% validation accuracy
+- Streamlit web app for real-time predictions from uploaded images
+- Supports agricultural quality control use cases
 
-## How to Run
+### Dataset
 
-### Prerequisites
-- Python 3.8+
-- Install dependencies: `pip install -r requirements.txt`
+**Source:** [Rice Image Dataset — Kaggle](https://www.kaggle.com/datasets/muratkokludataset/rice-image-dataset)
 
-### Training the Model
-1. Clone the repository.
-2. Ensure the `Rice_Image_Dataset/` folder is in the root directory.
-3. Open `Rice Classification.ipynb` in Jupyter Notebook.
-4. Run all cells to preprocess data, train the model, and save `my_rice_cnn_model.h5`.
+| Property | Detail |
+|---|---|
+| Total Images | ~75,000 |
+| Classes | 5 |
+| Image Format | RGB, high-resolution |
+| Input Size (model) | 64 × 64 px (resized & normalized) |
 
-### Running the Web App
-1. After training, run: `streamlit run app.py`
-2. Upload a rice image (JPG/PNG) via the web interface.
-3. View the predicted rice variety.
+### Model Architecture
 
-### Model Evaluation
-- Use the notebook to evaluate on test data.
-- Metrics include accuracy, precision, and recall per class.
+```
+Input (64, 64, 3)
+→ Conv2D (ReLU) → MaxPooling2D
+→ Conv2D (ReLU) → MaxPooling2D
+→ Flatten
+→ Dense (ReLU)
+→ Dense (5, softmax)
+```
 
-## Future Improvements
-- Add data augmentation for better generalization
-- Implement transfer learning with pre-trained models (e.g., ResNet)
-- Deploy the app on cloud platforms (Heroku, AWS)
-- Add more rice varieties or multi-class extensions
+**Training Details:**
 
-## License
-This project is open-source under the MIT License.
+| Parameter | Value |
+|---|---|
+| Epochs | 10 |
+| Optimizer | Adam |
+| Loss | Sparse Categorical Crossentropy |
+| Validation Accuracy | ~85–90% |
 
-## Acknowledgments
-- Dataset: Rice Image Dataset from Kaggle
-- Inspired by agricultural AI applications
+Saved model: `my_rice_cnn_model.h5`
+
+### How to Run
+
+**Training the model:**
+```bash
+git clone https://github.com/MMertAvc/rice-image-classification.git
+cd rice-image-classification
+pip install -r requirements.txt
+```
+
+1. Place the `Rice_Image_Dataset/` folder in the project root
+2. Open `Rice Classification.ipynb` in Jupyter Notebook
+3. Run all cells — this saves `my_rice_cnn_model.h5`
+
+**Running the web app:**
+```bash
+streamlit run app.py
+```
+Upload a rice image (JPG/PNG) via the web interface to view the predicted variety.
+
+### Project Structure
+
+```
+├── Rice Classification.ipynb       # Training notebook
+├── app.py                          # Streamlit web application
+├── my_rice_cnn_model.h5            # Trained model weights
+├── requirements.txt
+└── README.md
+```
+
+### Requirements
+
+```
+tensorflow
+keras
+opencv-python
+streamlit
+pillow
+pandas
+numpy
+matplotlib
+scikit-learn
+```
+
+---
+
+## Türkçe
+
+### Hakkında
+
+Bu proje, beş farklı pirinç çeşidini görüntülerden ayırt eden bir CNN modeli uygular: Arborio, Basmati, Ipsala, Jasmine ve Karacadag. Kaggle'dan ~75.000 yüksek çözünürlüklü görüntü kullanan model, tane türleri arasındaki ince görsel farklılıkları tanımlamak için eğitilir. Proje, bir Jupyter eğitim not defteri ve kullanıcı dostu tahminler için bir Streamlit web uygulaması içerir.
+
+### Özellikler
+
+- 5 sınıflı görüntü sınıflandırması (Arborio, Basmati, Ipsala, Jasmine, Karacadag)
+- ~%85–90 doğrulama doğruluğu
+- Yüklenen görüntülerden gerçek zamanlı tahminler için Streamlit web uygulaması
+- Tarımsal kalite kontrol kullanım senaryolarını destekler
+
+### Veri Seti
+
+**Kaynak:** [Pirinç Görüntü Veri Seti — Kaggle](https://www.kaggle.com/datasets/muratkokludataset/rice-image-dataset)
+
+| Özellik | Detay |
+|---|---|
+| Toplam Görüntü | ~75.000 |
+| Sınıf Sayısı | 5 |
+| Görüntü Formatı | RGB, yüksek çözünürlük |
+| Giriş Boyutu (model) | 64 × 64 piksel (yeniden boyutlandırılmış ve normalize edilmiş) |
+
+### Model Mimarisi
+
+```
+Giriş (64, 64, 3)
+→ Conv2D (ReLU) → MaxPooling2D
+→ Conv2D (ReLU) → MaxPooling2D
+→ Flatten
+→ Dense (ReLU)
+→ Dense (5, softmax)
+```
+
+**Eğitim Detayları:**
+
+| Parametre | Değer |
+|---|---|
+| Epoch Sayısı | 10 |
+| Optimizör | Adam |
+| Kayıp | Seyrek Kategorik Çapraz Entropi |
+| Doğrulama Doğruluğu | ~%85–90 |
+
+Kaydedilen model: `my_rice_cnn_model.h5`
+
+### Nasıl Çalıştırılır
+
+**Modeli eğitmek için:**
+```bash
+git clone https://github.com/MMertAvc/rice-image-classification.git
+cd rice-image-classification
+pip install -r requirements.txt
+```
+
+1. `Rice_Image_Dataset/` klasörünü proje köküne yerleştirin
+2. Jupyter Notebook'ta `Rice Classification.ipynb` dosyasını açın
+3. Tüm hücreleri çalıştırın — bu, `my_rice_cnn_model.h5` dosyasını kaydeder
+
+**Web uygulamasını çalıştırmak için:**
+```bash
+streamlit run app.py
+```
+Tahmin edilen çeşidi görüntülemek için web arayüzü üzerinden bir pirinç görüntüsü (JPG/PNG) yükleyin.
+
+### Proje Yapısı
+
+```
+├── Rice Classification.ipynb       # Eğitim not defteri
+├── app.py                          # Streamlit web uygulaması
+├── my_rice_cnn_model.h5            # Eğitilmiş model ağırlıkları
+├── requirements.txt
+└── README.md
+```
+
+### Gereksinimler
+
+```
+tensorflow
+keras
+opencv-python
+streamlit
+pillow
+pandas
+numpy
+matplotlib
+scikit-learn
+```
